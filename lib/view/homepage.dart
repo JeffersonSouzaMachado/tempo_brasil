@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.grey.withOpacity(0.4),
         // actions: [
@@ -53,45 +54,40 @@ class _HomePageState extends State<HomePage> {
             image: DecorationImage(
                 image: AssetImage('assets/images/weather_forecast.webp'),
                 fit: BoxFit.cover)),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                const CardWeather(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: CustomText(
-                    text: 'PREVISÃO POR HORA',
-                    color: lightColorScheme.primary,
-                    weight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 120,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, index){
-                      return HourlyWeatherCard();
-                      })
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: CustomText(
-                    text: 'PRÓXIMOS DIAS',
-                    color: lightColorScheme.primary,
-                    weight: FontWeight.bold,
-                  ),
-                ),
-                Expanded(child: ListView.builder(
-                    itemCount: 7,
-                    itemBuilder: (BuildContext context, index){
-                      return NextDaysView();
-                    }))
-              ],
+        child: Column(
+          children: [
+            const CardWeather(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: CustomText(
+                text: 'PREVISÃO POR HORA',
+                color: lightColorScheme.primary,
+                weight: FontWeight.bold,
+              ),
             ),
-          ),
+            SizedBox(
+              height: 120,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, index){
+                  return HourlyWeatherCard();
+                  })
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: CustomText(
+                text: 'PRÓXIMOS DIAS',
+                color: lightColorScheme.primary,
+                weight: FontWeight.bold,
+              ),
+            ),
+            Expanded(child: ListView.builder(
+                itemCount: 7,
+                itemBuilder: (BuildContext context, index){
+                  return NextDaysView();
+                }))
+          ],
         ),
       ),
     );
